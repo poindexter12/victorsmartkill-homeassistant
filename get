@@ -1,6 +1,6 @@
 #!/bin/bash
 # Originally from https://get.hacs.xyz and changed to fit victorsmartkill integration
-# wget -O - https://raw.githubusercontent.com/toreamun/victorsmartkill-homeassistant/master/get | bash -
+# wget -O - https://raw.githubusercontent.com/poindexter12/victorsmartkill-homeassistant/master/get | bash -
 set -e
 
 RED_COLOR='\033[0;31m'
@@ -60,7 +60,7 @@ if [ -n "$haPath" ]; then
     cd "$haPath/custom_components" || error "Could not change path to $haPath/custom_components"
 
     info "Downloading Victor Smart-Kill"
-    wget "https://github.com/toreamun/victorsmartkill-homeassistant/releases/latest/download/victorsmartkill.zip"
+    wget "https://github.com/poindexter12/victorsmartkill-homeassistant/releases/latest/download/victorsmartkill.zip"
 
     if [ -d "$haPath/custom_components/victorsmartkill" ]; then
         warn "victorsmartkill directory already exist, cleaning up..."

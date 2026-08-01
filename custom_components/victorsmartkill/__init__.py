@@ -98,6 +98,7 @@ class VictorSmartKillDataUpdateCoordinator(DataUpdateCoordinator[list[victor.Tra
     def __init__(  # noqa: PLR0913
         self,
         hass: HomeAssistant,
+        entry: VictorSmartKillConfigEntry,
         logger: logging.Logger,
         update_interval: dt.timedelta,
         username: str,
@@ -115,6 +116,7 @@ class VictorSmartKillDataUpdateCoordinator(DataUpdateCoordinator[list[victor.Tra
         super().__init__(
             hass,
             logger,
+            config_entry=entry,
             update_method=self.async_update_data,
             name=DOMAIN,
             update_interval=update_interval,
@@ -223,7 +225,13 @@ async def _async_initialize_coordinator(
     update_interval = dt.timedelta(minutes=update_interval_minutes)
 
     coordinator = VictorSmartKillDataUpdateCoordinator(
-        hass, _LOGGER, update_interval, str(username), str(password), enabled_platforms
+        hass,
+        entry,
+        _LOGGER,
+        update_interval,
+        str(username),
+        str(password),
+        enabled_platforms,
     )
 
     # Initialize coordinator with trap data
@@ -235,7 +243,6 @@ async def _async_initialize_coordinator(
     return coordinator
 
 
-@callback
 async def _async_config_entry_changed(
     hass: HomeAssistant, entry: VictorSmartKillConfigEntry
 ) -> None:
@@ -250,7 +257,6 @@ def _setup_reload(hass: HomeAssistant, entry: VictorSmartKillConfigEntry) -> Non
         entry.add_update_listener(_async_config_entry_changed)
     )
 
-    @callback
     async def async_trap_list_changed(event: Event) -> None:
         _LOGGER.info("Trap list hast changed (%s). Reload integration.", event.data)
         await hass.config_entries.async_reload(entry.entry_id)

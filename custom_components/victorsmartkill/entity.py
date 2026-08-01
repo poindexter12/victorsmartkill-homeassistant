@@ -119,8 +119,7 @@ class VictorSmartKillEntity(
 
         # remove excluded attributes
         for key in self._exclude_extra_state_attributes:
-            if key in state_attributes:
-                del state_attributes[key]
+            state_attributes.pop(key, None)
 
         return state_attributes
 

@@ -33,7 +33,7 @@ You need some kind of terminal to use this method. You can use one of the SSH ad
 2. Run this script
 
 ```
-wget -O - https://raw.githubusercontent.com/toreamun/victorsmartkill-homeassistant/master/get | bash -
+wget -O - https://raw.githubusercontent.com/poindexter12/victorsmartkill-homeassistant/master/get | bash -
 ```
 
 3. Restart Home Assistant (http://homeassistant.local:8123/config/server_control and select restart)
@@ -49,7 +49,7 @@ You need some kind of terminal to use this method. You can use one of the SSH ad
 4. Download lastest version
 
 ```
-wget https://github.com/toreamun/victorsmartkill-homeassistant/releases/latest/download/victorsmartkill.zip
+wget https://github.com/poindexter12/victorsmartkill-homeassistant/releases/latest/download/victorsmartkill.zip
 ```
 
 5. Unzip victorsmartkill.zip into folder victorsmartkill
@@ -73,7 +73,7 @@ Once the integration has been downloaded and Home Assistant has been restarted, 
 
 
 # Trap models and versions
-This integration should work with traps that has been provisioned with the VictorPest app. Please create an [issue](https://github.com/toreamun/victorsmartkill-homeassistant/issues/new/choose) if you have trouble with your trap. Please see the wiki if you are interested in details about the [hardware](https://github.com/toreamun/victorsmartkill-homeassistant/wiki/Hardware).
+This integration should work with traps that has been provisioned with the VictorPest app. Please create an [issue](https://github.com/poindexter12/victorsmartkill-homeassistant/issues/new/choose) if you have trouble with your trap. Please see the wiki if you are interested in details about the [hardware](https://github.com/toreamun/victorsmartkill-homeassistant/wiki/Hardware).
 
 It is very helpfull if you can check the [list of models](https://github.com/toreamun/victorsmartkill-homeassistant/wiki/Hardware#list-of-known-traps-versions) and update the list if you have an unlisted trap or version.
 
@@ -83,11 +83,11 @@ It is very helpfull if you can check the [list of models](https://github.com/tor
 [buymecoffee]: https://www.buymeacoffee.com/toreamun
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg
 [hacsbadge]: https://img.shields.io/badge/HACS-Default-orange.svg
-[license-shield]: https://img.shields.io/github/license/toreamun/victor-smart-kill
+[license-shield]: https://img.shields.io/github/license/poindexter12/victorsmartkill-homeassistant
 [maintenance-shield]: https://img.shields.io/badge/maintainer-Tore%20Amundsen%20%40toreamun-blue.svg
-[releases-shield]: https://img.shields.io/github/release/toreamun/victorsmartkill-homeassistant
-[releases]: https://github.com/toreamun/victorsmartkill-homeassistant/releases
-[language-grade-shield]: https://img.shields.io/lgtm/grade/python/g/toreamun/victorsmartkill-homeassistant.svg?logo=lgtm&logoWidth=18
-[lgtm-project]: https://lgtm.com/projects/g/toreamun/victorsmartkill-homeassistant/context:python
+[releases-shield]: https://img.shields.io/github/release/poindexter12/victorsmartkill-homeassistant
+[releases]: https://github.com/poindexter12/victorsmartkill-homeassistant/releases
+[language-grade-shield]: https://img.shields.io/lgtm/grade/python/g/poindexter12/victorsmartkill-homeassistant.svg?logo=lgtm&logoWidth=18
+[lgtm-project]: https://lgtm.com/projects/g/poindexter12/victorsmartkill-homeassistant/context:python
 [hacs]: https://github.com/hacs/integration
-[exampleimg]: https://raw.githubusercontent.com/toreamun/victorsmartkill-homeassistant/master/example.png
+[exampleimg]: https://raw.githubusercontent.com/poindexter12/victorsmartkill-homeassistant/master/example.png

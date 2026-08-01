@@ -6,7 +6,10 @@ on:
       - published
   push:
     branches:
-      - main
+      - master
+
+permissions:
+  contents: write # needed to upload release assets
 
 jobs:
   release_zip_file:

@@ -26,8 +26,6 @@ from custom_components.victorsmartkill.const import (  # pylint: disable=unused-
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-    from homeassistant.data_entry_flow import FlowResult
-
     from custom_components.victorsmartkill import VictorSmartKillConfigEntry
 
 _LOGGER = logging.getLogger(__name__)
@@ -42,7 +40,7 @@ class VictorSmartKillFlowHandler(ConfigFlow, domain=DOMAIN):
         """Initialize."""
         self._errors = {}
 
-    async def async_step_user(self, user_input: dict | None = None) -> FlowResult:
+    async def async_step_user(self, user_input: dict | None = None) -> ConfigFlowResult:
         """Handle a flow initiated by the user."""
         self._errors = {}
 
@@ -143,9 +141,11 @@ class VictorSmartKillFlowHandler(ConfigFlow, domain=DOMAIN):
 
     @staticmethod
     @callback
-    def async_get_options_flow(config_entry: VictorSmartKillConfigEntry) -> OptionsFlow:
+    def async_get_options_flow(
+        config_entry: VictorSmartKillConfigEntry,  # noqa: ARG004 Unused static method argument
+    ) -> OptionsFlow:
         """Get the options flow for this handler."""
-        return VictorSmartKillOptionsFlowHandler(config_entry)
+        return VictorSmartKillOptionsFlowHandler()
 
     async def _test_credentials(self, username: str, password: str) -> bool:
         """Return true if credentials is valid."""
@@ -169,37 +169,35 @@ class VictorSmartKillFlowHandler(ConfigFlow, domain=DOMAIN):
 class VictorSmartKillOptionsFlowHandler(OptionsFlow):
     """Victor Smart-Kill config flow options handler."""
 
-    def __init__(self, config_entry: VictorSmartKillConfigEntry) -> None:
-        """Initialize HACS options flow."""
-        self.config_entry = config_entry
-        self.options = dict(config_entry.options)
-
     async def async_step_init(
         self,
         user_input: dict[str, Any] | None = None,  # noqa: ARG002 Unused function argument: `user_input`
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Manage the options."""
         return await self.async_step_user()
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle a flow initialized by the user."""
         if user_input is not None:
-            self.options.update(user_input)
-            return await self._update_options()
+            return self.async_create_entry(
+                title=self.config_entry.data.get(CONF_USERNAME),
+                data={**self.config_entry.options, **user_input},
+            )
 
+        current = self.config_entry.options
         options = {
             vol.Required(
                 str(Platform.BINARY_SENSOR),
-                default=self.options.get(Platform.BINARY_SENSOR, True),
+                default=current.get(Platform.BINARY_SENSOR, True),
             ): bool,
             vol.Required(
-                str(Platform.SENSOR), default=self.options.get(Platform.SENSOR, True)
+                str(Platform.SENSOR), default=current.get(Platform.SENSOR, True)
             ): bool,
             vol.Optional(
                 CONF_SCAN_INTERVAL,
-                default=self.options.get(
+                default=current.get(
                     CONF_SCAN_INTERVAL, DEFAULT_UPDATE_INTERVAL_MINUTES
                 ),
             ): cv.positive_int,
@@ -208,10 +206,4 @@ class VictorSmartKillOptionsFlowHandler(OptionsFlow):
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema(options),
-        )
-
-    async def _update_options(self) -> FlowResult:
-        """Update config entry options."""
-        return self.async_create_entry(
-            title=self.config_entry.data.get(CONF_USERNAME), data=self.options
         )

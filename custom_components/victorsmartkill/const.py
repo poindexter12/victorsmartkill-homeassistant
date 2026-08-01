@@ -6,7 +6,7 @@ from __future__ import annotations
 MANUFACTURER = "VictorPest.com"
 NAME = "Victor Smart-Kill"
 DOMAIN = "victorsmartkill"
-ISSUE_URL = "https://github.com/toreamun/victorsmartkill-homeassistant/issues"
+ISSUE_URL = "https://github.com/poindexter12/victorsmartkill-homeassistant/issues"
 
 
 # Icons
