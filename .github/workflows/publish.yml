@@ -17,9 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Upload zip to action
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: ${{ github.event_name == 'push' }}
         with:
           name: victorsmartkill
@@ -30,7 +30,7 @@ jobs:
           cd ${{ github.workspace }}/custom_components/victorsmartkill
           zip victorsmartkill.zip -r ./
       - name: Upload zip to release
-        uses: svenstaro/upload-release-action@v2
+        uses: svenstaro/upload-release-action@29e53e917877a24fad85510ded594ab3c9ca12de # v2.11.5
         if: ${{ github.event_name == 'release' }}
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
